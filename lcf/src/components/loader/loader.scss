@@ -6,54 +6,41 @@
   height: 100%;
   background-color: black;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-}
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-}
-
-.animated-logo {
-  margin-top: 50px;
-  width: 200px;
-  animation: fadeInOut 2s;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  50% {
+  &.show {
     opacity: 1;
   }
-  100% {
+
+  &.hide {
     opacity: 0;
+    pointer-events: none;
   }
-}
 
-.animated-letter {
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-}
+  .loading-text {
+    color: white;
+    font-size: 24px;
+    white-space: pre-line;
+    text-align: center; // Centrage du texte
+  }
 
-.text-container {
-  margin-top: 20px;
-  font-size: 72px;
-  color: white;
-}
-
-@keyframes fadeIn {
-  from {
+  .loading-text span {
+    display: inline-block;
     opacity: 0;
+    animation: appear 0.5s forwards;
   }
-  to {
-    opacity: 1;
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

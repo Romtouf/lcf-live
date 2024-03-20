@@ -1,62 +1,31 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import loaderVideo from "../../assets/loader.mp4";
-import loaderLogo from "../../assets/logo-lcf-1.svg";
+import React, { useEffect, useState } from "react";
 
 const Loader = () => {
-  const [showLogo, setShowLogo] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
-  const [showText, setShowText] = useState(false);
-
-  const textToShow = "L'HISTOIRE S'ÉCRIT ICI !";
-
+  const [text, setText] = useState("");
+  const loadingText =
+    "L'Histoire s'écrit ici...\nCette Histoire, c'est celle du Lisieux Club Futsal.";
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLogo(true);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= loadingText.length) {
+        setText(loadingText.substring(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 3000); // Temps supplémentaire pour l'animation
+      }
+    }, 100); // Délai entre chaque lettre (100ms)
 
-  useEffect(() => {
-    const loaderTimer = setTimeout(() => {
-      setShowLoader(false);
-    }, 6000);
-
-    return () => clearTimeout(loaderTimer);
-  }, []);
-
-  useEffect(() => {
-    const textTimer = setTimeout(() => {
-      setShowText(true);
-    }, 3000);
-
-    return () => clearTimeout(textTimer);
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <>
-      {showLoader && (
-        <div className="loader-container">
-          <video className="background-video" autoPlay loop muted>
-            <source src={loaderVideo} type="video/mp4" />
-          </video>
-          <img
-            className="animated-logo"
-            src={loaderLogo}
-            alt="Logo du Lisieux Club Futsal"
-          />
-          {showText && (
-            <div className="text-container">
-              {textToShow.split("").map((letter, index) => (
-                <span key={index} className="animated-letter">
-                  {letter}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </>
+    <div className={`loader-container ${showLoader ? "show" : "hide"}`}>
+      <div className="loading-text">{text}</div>
+    </div>
   );
 };
 

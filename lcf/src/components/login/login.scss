@@ -5,6 +5,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    & h1 {
+      font-size: 48px;
+    }
     &__buttons {
       display: flex;
       flex-direction: column;
@@ -12,6 +15,78 @@
       align-items: center;
       gap: 20px;
       margin-bottom: 20px;
+      &__loginBtn {
+        border-radius: 50px;
+        border: 2px solid yellow;
+        background-color: black;
+        color: yellow;
+        width: 300px;
+        height: 50px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+      &__createBtn {
+        border-radius: 50px;
+        border: 2px solid yellow;
+        background-color: black;
+        color: yellow;
+        width: 300px;
+        height: 50px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* S'assurer que la modal est au premier plan */
+
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    width: 300px;
+    max-width: 80%;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
     }
   }
 }
